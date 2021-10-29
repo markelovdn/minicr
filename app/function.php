@@ -75,13 +75,32 @@ function redirect_too($path)
 function check_user($email, $pass) {
     $user = get_user_by_email($email);
     if (password_verify($user['password'], $pass)) {
-
-    $_SESSION['user'] = [
-        'id'=>$user['id'],
-        'email'=>$email
-    ];
     return true;
     }
+}
+
+function get_all_user(){
+    $db = db();
+    $sql = "SELECT * FROM users ORDER BY name DESC";
+    $users = array();
+    $result = mysqli_query($db, $sql) or die("Ошибка " . mysqli_error($db));
+    if($result)
+    {
+        while ($row = mysqli_fetch_assoc($result)){
+            $users[]=$row;
+        }
+        mysqli_free_result($result);
+    }
+    mysqli_close($db);
+    return $users;
+}
+
+function get_user($id){
+    $db = db();
+    $sql = "SELECT * FROM users WHERE id = '$id'";
+    $result = mysqli_query($db, $sql);
+    $data = mysqli_fetch_assoc($result);
+    return $data;
 }
 
 

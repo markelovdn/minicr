@@ -103,6 +103,28 @@ function get_user($id){
     return $data;
 }
 
+function add_user_info(){
+//
+}
+
+function edit_user_info(){
+//
+}
+
+function set_user_status(){
+//
+}
+
+function upload_user_avatar(){
+//
+}
+
+function add_user_sl(){
+//
+}
+
+
+
 
 function dd($var) {
     echo '<pre>';

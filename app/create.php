@@ -13,7 +13,7 @@ $status = $_POST['status'];
 $vk = $_POST['vk'];
 $telegram = $_POST['telegram'];
 $instagram = $_POST['instagram'];
-$photo = $_FILES['photo'];
+$_FILES['photo']['tmp_name'];
 //dd($photo);
 
 if ($email==null) {
@@ -30,7 +30,7 @@ if ($email==null) {
     edit_user_info($username, $workplace, $phone, $adress);
     set_user_status($status);
     add_user_sl($vk, $telegram, $instagram);
-    upload_user_photo($photo);
+    upload_user_photo($_FILES['photo']['tmp_name']);
     redirect_too('../users.php');
 }
 

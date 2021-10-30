@@ -1,3 +1,8 @@
+<?php include 'app/function.php';
+session_start();
+$id = $_GET['id'];
+$user = get_user($id);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +43,7 @@
             </h1>
 
         </div>
-        <form action="">
+        <form action="app/photo.php" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -48,17 +53,19 @@
                             </div>
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <img src="img/demo/authors/josh.png" alt="" class="img-responsive" width="200">
+                                    <img src="img/userfoto/<?= $user['photo']?>" alt="" class="img-responsive" width="200">
                                 </div>
+                                <!-- email display:none -->
+                                <input type="text" name="email" id="simpleinput" class="form-control" value="<?= $user['email']?>" style="display: none">
 
                                 <div class="form-group">
                                     <label class="form-label" for="example-fileinput">Выберите аватар</label>
-                                    <input type="file" id="example-fileinput" class="form-control-file">
+                                    <input type="file" name="photo" id="example-fileinput" class="form-control-file">
                                 </div>
 
 
                                 <div class="col-md-12 mt-3 d-flex flex-row-reverse">
-                                    <button class="btn btn-warning">Загрузить</button>
+                                    <button type="submit" class="btn btn-warning">Загрузить</button>
                                 </div>
                             </div>
                         </div>

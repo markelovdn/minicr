@@ -75,7 +75,7 @@ function redirect_too($path)
 function check_user($email, $pass) {
     $user = get_user_by_email($email);
     if (password_verify($user['password'], $pass)) {
-    return true;
+        return true;
     }
 }
 
@@ -106,10 +106,19 @@ function get_user($id){
 function edit_user_info($username, $workplace, $phone, $adress){
     $db = db();
     $email = $_POST['email'];
-
     $user = get_user_by_email($email);
     $user_id = $user['id'];
     $sql = "UPDATE users SET name = '$username', workplace = '$workplace', phonanumber = '$phone', adres = '$adress' WHERE id = $user_id";
+    //dd($sql);
+    mysqli_query($db, $sql);
+}
+
+function edit_user_secur_info($email, $password){
+    $db = db();
+    $email = $_POST['email'];
+    $user = get_user_by_email($email);
+    $user_id = $user['id'];
+    $sql = "UPDATE users SET email = '$email', password = '$password' WHERE id = $user_id";
     //dd($sql);
     mysqli_query($db, $sql);
 }
@@ -130,14 +139,15 @@ function upload_user_photo($photo){
     $user_id = $user['id'];
     $file_name = $_POST['name']."_".$_POST['email'].".jpg";
     $sql = "UPDATE users SET photo = '$file_name' WHERE id = $user_id";
+    //dd($sql);
     mysqli_query($db, $sql);
 
-    if(isset($photo['photo']['tmp_name'])){
+    if(isset($photo)){
         $dir=$_SERVER['DOCUMENT_ROOT'].'/img/userfoto/';
         if(file_exists($dir.$file_name)){
             unlink($dir.$file_name); //удаляем файл если он уже загружен
         }
-        move_uploaded_file($photo['foto']['tmp_name'], $dir.$file_name);
+        move_uploaded_file($photo, $dir.$file_name);
     }
 }
 
@@ -150,6 +160,12 @@ function add_user_sl($vk, $telegram, $instagram){
     mysqli_query($db, $sql);
 }
 
+function drop_user($id){
+    $db = db();
+    $sql = "DELETE FROM users WHERE id = $id";
+    //dd($sql);
+    mysqli_query($db, $sql);
+}
 
 function dd($var) {
     echo '<pre>';

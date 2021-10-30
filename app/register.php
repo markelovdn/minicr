@@ -3,7 +3,7 @@ session_start();
 require 'function.php';
 
 $email = $_POST['email'];
-$password = $_POST['email'];
+$password = $_POST['password'];
 $hash = password_hash($password, PASSWORD_DEFAULT);
 
 if (get_user_by_email($email)) {
@@ -11,6 +11,6 @@ if (get_user_by_email($email)) {
     redirect_too('../index.php');
     exit();
 }
-add_user($email, $hash);
+reg_user($email, $hash);
 redirect_too('../page_login.php');
 

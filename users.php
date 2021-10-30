@@ -16,7 +16,6 @@ session_start();
     <link rel="stylesheet" media="screen, print" href="css/fa-brands.css">
     <link rel="stylesheet" media="screen, print" href="css/fa-regular.css">
 </head>
-
     <body class="mod-bg-1 mod-nav-link">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-primary-gradient">
             <a class="navbar-brand d-flex align-items-center fw-500" href="users.html"><img alt="logo" class="d-inline-block align-top mr-2" src="img/logo.png"> Учебный проект</a> <button aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarColor02" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
@@ -36,7 +35,6 @@ session_start();
                 </ul>
             </div>
         </nav>
-
         <main id="js-page-content" role="main" class="page-content mt-3">
             <div class="alert alert-success">
                 Профиль успешно обновлен.
@@ -198,10 +196,8 @@ session_start();
                 </div>
                 <?endforeach;?>
                 <?php endif;?>
-
             </div>
         </main>
-     
         <!-- BEGIN Page Footer -->
         <footer class="page-footer" role="contentinfo">
             <div class="d-flex align-items-center flex-1 text-muted">
@@ -214,7 +210,6 @@ session_start();
                 </ul>
             </div>
         </footer>
-        
     </body>
 
     <script src="js/vendors.bundle.js"></script>

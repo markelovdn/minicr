@@ -3,7 +3,7 @@ session_start();
 require 'function.php';
 
 $email = $_POST['email'];
-$password = $_POST['email'];
+$password = $_POST['password'];
 $hash = password_hash($password, PASSWORD_DEFAULT);
 
 $user = get_user_by_email($email);

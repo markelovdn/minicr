@@ -27,7 +27,7 @@ function get_user_by_email($email)
  * Return value: int($user->id)
  */
 
-function add_user($email, $password)
+function reg_user($email, $password)
 {
     $db = db();
     $sql = "INSERT INTO users (email, password) VALUES ('$email', '$password')";
@@ -103,31 +103,58 @@ function get_user($id){
     return $data;
 }
 
-function add_user_info(){
-//
+function edit_user_info($username, $workplace, $phone, $adress){
+    $db = db();
+    $email = $_POST['email'];
+
+    $user = get_user_by_email($email);
+    $user_id = $user['id'];
+    $sql = "UPDATE users SET name = '$username', workplace = '$workplace', phonanumber = '$phone', adres = '$adress' WHERE id = $user_id";
+    //dd($sql);
+    mysqli_query($db, $sql);
 }
 
-function edit_user_info(){
-//
+function set_user_status($status){
+    $db = db();
+    $email = $_POST['email'];
+    $user = get_user_by_email($email);
+    $user_id = $user['id'];
+    $sql = "UPDATE users SET status = '$status' WHERE id = $user_id";
+    mysqli_query($db, $sql);
 }
 
-function set_user_status(){
-//
+function upload_user_photo($photo){
+    $db = db();
+    $email = $_POST['email'];
+    $user = get_user_by_email($email);
+    $user_id = $user['id'];
+    $file_name = $_POST['name']."_".$_POST['email'].".jpg";
+    $sql = "UPDATE users SET photo = '$file_name' WHERE id = $user_id";
+    mysqli_query($db, $sql);
+
+    if(isset($photo['photo']['tmp_name'])){
+        $dir=$_SERVER['DOCUMENT_ROOT'].'/img/userfoto/';
+        if(file_exists($dir.$file_name)){
+            unlink($dir.$file_name); //удаляем файл если он уже загружен
+        }
+        move_uploaded_file($photo['foto']['tmp_name'], $dir.$file_name);
+    }
 }
 
-function upload_user_avatar(){
-//
+function add_user_sl($vk, $telegram, $instagram){
+    $db = db();
+    $email = $_POST['email'];
+    $user = get_user_by_email($email);
+    $user_id = $user['id'];
+    $sql = "UPDATE users SET vk = '$vk', telegram = '$telegram', instagram = '$instagram' WHERE id = $user_id";
+    mysqli_query($db, $sql);
 }
-
-function add_user_sl(){
-//
-}
-
-
 
 
 function dd($var) {
     echo '<pre>';
     var_dump($var);
     echo '</pre>';
+    die();
+    error_reporting(-1);
 }

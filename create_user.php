@@ -1,3 +1,6 @@
+<?php include 'app/function.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,15 +36,23 @@
         </div>
     </nav>
     <main id="js-page-content" role="main" class="page-content mt-3">
+        <?php if(isset($_SESSION['no_email'])):?>
+            <div class="alert alert-danger text-dark" role="alert">
+                <strong>Уведомление!</strong> <?=display_flash_message('no_email')?>
+            </div>
+        <?php endif ?>
+        <?php if(isset($_SESSION['not_ok'])):?>
+            <div class="alert alert-danger text-dark" role="alert">
+                <strong>Уведомление!</strong> <?=display_flash_message('not_ok')?>
+            </div>
+        <?php endif ?>
+
         <div class="subheader">
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-plus-circle'></i> Добавить пользователя
             </h1>
-
-
-
-        </div>
-        <form action="">
+       </div>
+        <form method="post" action="app/create.php" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -53,25 +64,25 @@
                                 <!-- username -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Имя</label>
-                                    <input type="text" id="simpleinput" class="form-control">
+                                    <input type="text" id="simpleinput" name="name" class="form-control">
                                 </div>
 
                                 <!-- title -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Место работы</label>
-                                    <input type="text" id="simpleinput" class="form-control">
+                                    <input type="text" id="simpleinput" name="workplace" class="form-control">
                                 </div>
 
                                 <!-- tel -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Номер телефона</label>
-                                    <input type="text" id="simpleinput" class="form-control">
+                                    <input type="text" id="simpleinput" name="phonanumber" class="form-control">
                                 </div>
 
                                 <!-- address -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Адрес</label>
-                                    <input type="text" id="simpleinput" class="form-control">
+                                    <input type="text" id="simpleinput" name="adres" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -88,20 +99,20 @@
                                 <!-- email -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Email</label>
-                                    <input type="text" id="simpleinput" class="form-control">
+                                    <input type="text" id="simpleinput" name="email" class="form-control">
                                 </div>
 
                                 <!-- password -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Пароль</label>
-                                    <input type="password" id="simpleinput" class="form-control">
+                                    <input type="password" id="simpleinput" name="password" class="form-control">
                                 </div>
 
                                 
                                 <!-- status -->
                                 <div class="form-group">
                                     <label class="form-label" for="example-select">Выберите статус</label>
-                                    <select class="form-control" id="example-select">
+                                    <select class="form-control" id="example-select" name="status">
                                         <option>Онлайн</option>
                                         <option>Отошел</option>
                                         <option>Не беспокоить</option>
@@ -110,7 +121,7 @@
 
                                 <div class="form-group">
                                     <label class="form-label" for="example-fileinput">Загрузить аватар</label>
-                                    <input type="file" id="example-fileinput" class="form-control-file">
+                                    <input type="file" id="example-fileinput" class="form-control-file" name="photo">
                                 </div>
                             </div>
                         </div>
@@ -137,7 +148,7 @@
                                                     </span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0">
+                                            <input type="text" name="vk" class="form-control border-left-0 bg-transparent pl-0">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -151,7 +162,7 @@
                                                     </span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0">
+                                            <input type="text" name="telegram" class="form-control border-left-0 bg-transparent pl-0">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -165,7 +176,7 @@
                                                     </span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0">
+                                            <input type="text" name="instagram" class="form-control border-left-0 bg-transparent pl-0">
                                         </div>
                                     </div>
                                     <div class="col-md-12 mt-3 d-flex flex-row-reverse">

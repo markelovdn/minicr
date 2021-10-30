@@ -1,3 +1,8 @@
+<?php include 'app/function.php';
+session_start();
+$id = $_GET['id'];
+$user = get_user($id);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +43,7 @@
             </h1>
 
         </div>
-        <form action="">
+        <form action="app/status.php" method="post">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -49,10 +54,12 @@
                             <div class="panel-content">
                                 <div class="row">
                                     <div class="col-md-4">
+                                        <!-- email display:none -->
+                                        <input type="text" name="email" id="simpleinput" class="form-control" value="<?= $user['email']?>" style="display: none">
                                         <!-- status -->
                                         <div class="form-group">
                                             <label class="form-label" for="example-select">Выберите статус</label>
-                                            <select class="form-control" id="example-select">
+                                            <select class="form-control" name="status" id="example-select">
                                                 <option>Онлайн</option>
                                                 <option>Отошел</option>
                                                 <option>Не беспокоить</option>

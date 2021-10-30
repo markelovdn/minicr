@@ -16,10 +16,9 @@ session_start();
     <link rel="stylesheet" media="screen, print" href="css/fa-brands.css">
     <link rel="stylesheet" media="screen, print" href="css/fa-regular.css">
 </head>
-
     <body class="mod-bg-1 mod-nav-link">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-primary-gradient">
-            <a class="navbar-brand d-flex align-items-center fw-500" href="users.html"><img alt="logo" class="d-inline-block align-top mr-2" src="img/logo.png"> Учебный проект</a> <button aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarColor02" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+            <a class="navbar-brand d-flex align-items-center fw-500" href="users.php"><img alt="logo" class="d-inline-block align-top mr-2" src="img/logo.png"> Учебный проект</a> <button aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarColor02" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
@@ -36,7 +35,6 @@ session_start();
                 </ul>
             </div>
         </nav>
-
         <main id="js-page-content" role="main" class="page-content mt-3">
             <div class="alert alert-success">
                 Профиль успешно обновлен.
@@ -53,9 +51,15 @@ session_start();
                             <div id="c_1" class="card border shadow-0 mb-g shadow-sm-hover" data-filter-tags="oliver kopyov">
                                 <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
                                     <div class="d-flex flex-row align-items-center">
-                                <span class="status status-success mr-3">
+                                        <?php if($user['status'] == 'Онлайн'){
+                                            echo '<span class="status status-success mr-3">';
+                                        } elseif ($user['status'] == 'Отошел') {
+                                            echo '<span class="status status-warning mr-3">';
+                                        }else {
+                                            echo '<span class="status status-danger mr-3">';
+                                        }?>
 
-                                    <span class="rounded-circle profile-image d-block " style="background-image:url('img/demo/avatars/avatar-b.png'); background-size: cover;"></span>
+                                    <span class="rounded-circle profile-image d-block " style="background-image:url('/img/userfoto/<?= $user['photo']?>'); background-size: cover;"></span>
                                 </span>
                                         <div class="info-card-text flex-1">
                                             <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info" data-toggle="dropdown" aria-expanded="false">
@@ -64,20 +68,20 @@ session_start();
                                                 <i class="fal fa-angle-down d-inline-block ml-1 fs-md"></i>
                                             </a>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="edit.html">
+                                                <a class="dropdown-item" href="edit.php?id=<?= $user['id']?>">
                                                     <i class="fa fa-edit"></i>
                                                     Редактировать</a>
-                                                <a class="dropdown-item" href="security.html">
+                                                <a class="dropdown-item" href="security.php?id=<?= $user['id']?>">
                                                     <i class="fa fa-lock"></i>
                                                     Безопасность</a>
-                                                <a class="dropdown-item" href="status.html">
+                                                <a class="dropdown-item" href="status.php?id=<?= $user['id']?>">
                                                     <i class="fa fa-sun"></i>
                                                     Установить статус</a>
-                                                <a class="dropdown-item" href="media.html">
+                                                <a class="dropdown-item" href="media.php?id=<?= $user['id']?>">
                                                     <i class="fa fa-camera"></i>
                                                     Загрузить аватар
                                                 </a>
-                                                <a href="#" class="dropdown-item" onclick="return confirm('are you sure?');">
+                                                <a href="app/drop.php?id=<?= $user['id']?>" class="dropdown-item" onclick="return confirm('are you sure?');">
                                                     <i class="fa fa-window-close"></i>
                                                     Удалить
                                                 </a>
@@ -136,9 +140,14 @@ session_start();
                     <div id="c_1" class="card border shadow-0 mb-g shadow-sm-hover" data-filter-tags="oliver kopyov">
                         <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
                             <div class="d-flex flex-row align-items-center">
-                                <span class="status status-success mr-3">
-
-                                    <span class="rounded-circle profile-image d-block " style="background-image:url('img/demo/avatars/avatar-b.png'); background-size: cover;"></span>
+                                <?php if($user['status'] == 'Онлайн'){
+                                    echo '<span class="status status-success mr-3">';
+                                    } elseif ($user['status'] == 'Отошел') {
+                                    echo '<span class="status status-warning mr-3">';
+                                }else {
+                                    echo '<span class="status status-danger mr-3">';
+                                }?>
+                                    <span class="rounded-circle profile-image d-block " style="background-image:url('/img/userfoto/<?= $user['photo']?>'); background-size: cover;"></span>
                                 </span>
                                 <div class="info-card-text flex-1">
                                     <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info" data-toggle="dropdown" aria-expanded="false">
@@ -147,20 +156,20 @@ session_start();
                                         <i class="fal fa-angle-down d-inline-block ml-1 fs-md"></i>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="edit.php">
+                                        <a class="dropdown-item" href="edit.php?id=<?= $user['id']?>">
                                             <i class="fa fa-edit"></i>
                                         Редактировать</a>
-                                        <a class="dropdown-item" href="security.php">
+                                        <a class="dropdown-item" href="security.php?id=<?= $user['id']?>">
                                             <i class="fa fa-lock"></i>
                                         Безопасность</a>
-                                        <a class="dropdown-item" href="status.php">
+                                        <a class="dropdown-item" href="status.php?id=<?= $user['id']?>">
                                             <i class="fa fa-sun"></i>
                                         Установить статус</a>
-                                        <a class="dropdown-item" href="media.php">
+                                        <a class="dropdown-item" href="media.php?id=<?= $user['id']?>">
                                             <i class="fa fa-camera"></i>
                                             Загрузить аватар
                                         </a>
-                                        <a href="#" class="dropdown-item" onclick="return confirm('are you sure?');">
+                                        <a href="app/drop.php?id=<?= $user['id']?>" class="dropdown-item" onclick="return confirm('are you sure?');">
                                             <i class="fa fa-window-close"></i>
                                             Удалить
                                         </a>
@@ -198,10 +207,8 @@ session_start();
                 </div>
                 <?endforeach;?>
                 <?php endif;?>
-
             </div>
         </main>
-     
         <!-- BEGIN Page Footer -->
         <footer class="page-footer" role="contentinfo">
             <div class="d-flex align-items-center flex-1 text-muted">
@@ -214,7 +221,6 @@ session_start();
                 </ul>
             </div>
         </footer>
-        
     </body>
 
     <script src="js/vendors.bundle.js"></script>

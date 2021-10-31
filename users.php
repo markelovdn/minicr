@@ -1,5 +1,10 @@
 <?php include 'app/function.php';
 session_start();
+$id = $_GET['id'];
+$user = get_user($id);
+if (empty($_SESSION['user'])) {
+    redirect_too('page_login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +35,7 @@ session_start();
                         <a class="nav-link" href="page_login.php">Войти</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Выйти</a>
+                        <a class="nav-link" href="app/unset.php">Выйти</a>
                     </li>
                 </ul>
             </div>
@@ -119,7 +124,7 @@ session_start();
                         </div>
                     <?php  endif;?>
                     <?php if($_SESSION['user']['role'] == 'admin'):?>
-                        <?php  $users = get_all_user();?>
+                        <?php  $users = get_all_users();?>
                     <a class="btn btn-success" href="create_user.php">Добавить</a>
                     <div class="border-faded bg-faded p-3 mb-g d-flex mt-3">
                         <input type="text" id="js-filter-contacts" name="filter-contacts" class="form-control shadow-inset-2 form-control-lg" placeholder="Найти пользователя">

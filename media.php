@@ -2,6 +2,9 @@
 session_start();
 $id = $_GET['id'];
 $user = get_user($id);
+if (empty($_SESSION['user'])) {
+    redirect_too('page_login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,8 +58,8 @@ $user = get_user($id);
                                 <div class="form-group">
                                     <img src="img/userfoto/<?= $user['photo']?>" alt="" class="img-responsive" width="200">
                                 </div>
-                                <!-- email display:none -->
-                                <input type="text" name="email" id="simpleinput" class="form-control" value="<?= $user['email']?>" style="display: none">
+                                <!-- id display:none -->
+                                <input type="text" name="id" id="simpleinput" class="form-control" value="<?= $user['id']?>" style="display: none">
 
                                 <div class="form-group">
                                     <label class="form-label" for="example-fileinput">Выберите аватар</label>

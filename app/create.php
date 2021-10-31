@@ -3,6 +3,7 @@ session_start();
 require 'function.php';
 
 $email = $_POST['email'];
+$user_id = $_POST['id'];
 $password = $_POST['password'];
 $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 $username = $_POST['name'];
@@ -13,7 +14,7 @@ $status = $_POST['status'];
 $vk = $_POST['vk'];
 $telegram = $_POST['telegram'];
 $instagram = $_POST['instagram'];
-$_FILES['photo']['tmp_name'];
+
 //dd($photo);
 
 if ($email==null) {
@@ -27,10 +28,11 @@ if ($email==null) {
     exit();
 } else {
     reg_user($email, $hash);
-    edit_user_info($username, $workplace, $phone, $adress);
-    set_user_status($status);
-    add_user_sl($vk, $telegram, $instagram);
-    upload_user_photo($_FILES['photo']['tmp_name']);
+    $user_id = get_user_by_email($email);
+    edit_user_info($user_id['id'], $username, $workplace, $phone, $adress);
+    set_user_status($user_id['id'], $status);
+    add_user_sl($user_id['id'], $vk, $telegram, $instagram);
+    upload_user_photo($user_id['id'], $_FILES['photo']['tmp_name']);
     redirect_too('../users.php');
 }
 

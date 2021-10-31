@@ -2,6 +2,9 @@
 session_start();
 $id = $_GET['id'];
 $user = get_user($id);
+if (empty($_SESSION['user'])) {
+    redirect_too('page_login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +44,6 @@ $user = get_user($id);
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-plus-circle'></i> Редактировать
             </h1>
-
         </div>
         <form method="post" action="app/edit.php">
             <div class="row">
@@ -53,7 +55,7 @@ $user = get_user($id);
                             </div>
                             <div class="panel-content">
                                 <!-- email display:none -->
-                                    <input type="text" name="email" id="simpleinput" class="form-control" value="<?= $user['email']?>" style="display: none">
+                                    <input type="text" name="id" id="simpleinput" class="form-control" value="<?= $user['id']?>" style="display: none">
                                 <!-- username -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Имя</label>

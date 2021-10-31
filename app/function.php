@@ -79,7 +79,7 @@ function check_user($email, $pass) {
     }
 }
 
-function get_all_user(){
+function get_all_users(){
     $db = db();
     $sql = "SELECT * FROM users ORDER BY name DESC";
     $users = array();
@@ -103,41 +103,30 @@ function get_user($id){
     return $data;
 }
 
-function edit_user_info($username, $workplace, $phone, $adress){
+function edit_user_info($user_id, $username, $workplace, $phone, $adress){
     $db = db();
-    $email = $_POST['email'];
-    $user = get_user_by_email($email);
-    $user_id = $user['id'];
     $sql = "UPDATE users SET name = '$username', workplace = '$workplace', phonanumber = '$phone', adres = '$adress' WHERE id = $user_id";
     //dd($sql);
     mysqli_query($db, $sql);
 }
 
-function edit_user_secur_info($email, $password){
+function edit_user_secur_info($user_id, $email, $pass){
     $db = db();
-    $email = $_POST['email'];
-    $user = get_user_by_email($email);
-    $user_id = $user['id'];
+    $password = password_hash($pass, PASSWORD_DEFAULT);
     $sql = "UPDATE users SET email = '$email', password = '$password' WHERE id = $user_id";
     //dd($sql);
     mysqli_query($db, $sql);
 }
 
-function set_user_status($status){
+function set_user_status($user_id, $status){
     $db = db();
-    $email = $_POST['email'];
-    $user = get_user_by_email($email);
-    $user_id = $user['id'];
     $sql = "UPDATE users SET status = '$status' WHERE id = $user_id";
     mysqli_query($db, $sql);
 }
 
-function upload_user_photo($photo){
+function upload_user_photo($user_id, $photo){
     $db = db();
-    $email = $_POST['email'];
-    $user = get_user_by_email($email);
-    $user_id = $user['id'];
-    $file_name = $_POST['name']."_".$_POST['email'].".jpg";
+    $file_name = $_POST['id']."_photo".".jpg";
     $sql = "UPDATE users SET photo = '$file_name' WHERE id = $user_id";
     //dd($sql);
     mysqli_query($db, $sql);
@@ -151,11 +140,8 @@ function upload_user_photo($photo){
     }
 }
 
-function add_user_sl($vk, $telegram, $instagram){
+function add_user_sl($user_id, $vk, $telegram, $instagram){
     $db = db();
-    $email = $_POST['email'];
-    $user = get_user_by_email($email);
-    $user_id = $user['id'];
     $sql = "UPDATE users SET vk = '$vk', telegram = '$telegram', instagram = '$instagram' WHERE id = $user_id";
     mysqli_query($db, $sql);
 }
@@ -165,6 +151,10 @@ function drop_user($id){
     $sql = "DELETE FROM users WHERE id = $id";
     //dd($sql);
     mysqli_query($db, $sql);
+}
+
+function unset_user() {
+    unset($_SESSION['user']);
 }
 
 function dd($var) {

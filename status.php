@@ -2,6 +2,9 @@
 session_start();
 $id = $_GET['id'];
 $user = get_user($id);
+if (empty($_SESSION['user'])) {
+    redirect_too('page_login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

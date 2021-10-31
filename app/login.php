@@ -14,7 +14,6 @@ if (!$user) {
 }
 
 if(check_user($email, $hash)) {
-set_flash_message('login_ok','Авторизация пройдена');
 $_SESSION['user'] = [
     'id'=>$user['id'],
     'email'=>$email,

@@ -42,12 +42,6 @@ session_start();
                 <?=display_flash_message('err_login')?>
             </div>
             <?php endif ?>
-            <?php if(isset($_SESSION['login_ok'])):?>
-                <div class="alert alert-success">
-                    <?=display_flash_message('login_ok')?>
-                </div>
-            <?php endif ?>
-
             <form method="post" action="app/login.php">
                 <div class="form-group">
                     <label class="form-label" for="username">Email</label>

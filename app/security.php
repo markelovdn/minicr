@@ -2,14 +2,13 @@
 session_start();
 require 'function.php';
 
+$user_id = $_POST['id'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 $repassword = $_POST['repassword'];
-$hashpass = password_hash($password, PASSWORD_DEFAULT);
-$hashrepass = password_hash($repassword, PASSWORD_DEFAULT);
 
 if ($password == $repassword) {
-    edit_user_secur_info($email, $hashpass);
+    edit_user_secur_info($user_id, $email, $password);
 }
 
 redirect_too('../users.php');

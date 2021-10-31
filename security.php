@@ -2,6 +2,9 @@
 session_start();
 $id = $_GET['id'];
 $user = get_user($id);
+if (empty($_SESSION['user'])) {
+    redirect_too('page_login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,6 +55,8 @@ $user = get_user($id);
                                 <h2>Обновление эл. адреса и пароля</h2>
                             </div>
                             <div class="panel-content">
+                                <!-- id -->
+                                <input type="text" name="id" id="simpleinput" class="form-control" value="<?= $user['id']?>">
                                 <!-- email -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Email</label>

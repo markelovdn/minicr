@@ -1,5 +1,8 @@
 <?php include 'app/function.php';
 session_start();
+if (empty($_SESSION['user'])) {
+    redirect_too('page_login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +49,6 @@ session_start();
                 <strong>Уведомление!</strong> <?=display_flash_message('not_ok')?>
             </div>
         <?php endif ?>
-
         <div class="subheader">
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-plus-circle'></i> Добавить пользователя
@@ -61,6 +63,9 @@ session_start();
                                 <h2>Общая информация</h2>
                             </div>
                             <div class="panel-content">
+                                <input type="text" id="simpleinput" name="id" class="form-control">
+                                <!-- id -->
+                                <input type="text" id="simpleinput" name="id" class="form-control" style="display: none">
                                 <!-- username -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Имя</label>

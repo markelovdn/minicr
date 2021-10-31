@@ -1,11 +1,10 @@
 <?php
 session_start();
 require 'function.php';
-$email = $_POST['email'];
-$_FILES['photo']['tmp_name'];
+$user_id = $_POST['id'];
 //dd($_FILES);
 
-upload_user_photo($_FILES['photo']['tmp_name']);
+upload_user_photo($user_id, $_FILES['photo']['tmp_name']);
 
 redirect_too('../users.php');
 

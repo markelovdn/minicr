@@ -68,18 +68,25 @@ if (empty($_SESSION['user'])) {
                     </div>
                 </div>
             </div>
+
+
+
             <div class="row" id="js-contacts">
                 <? foreach ($users as $user):?>
                 <div class="col-xl-4">
                     <div id="c_1" class="card border shadow-0 mb-g shadow-sm-hover" data-filter-tags="oliver kopyov">
                         <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
                             <div class="d-flex flex-row align-items-center">
-                                <?php if($user['status'] == 'Онлайн'){
+                                <?php switch($user['status']) {
+                                 case $user['status'] == 'Онлайн' :
                                     echo '<span class="status status-success mr-3">';
-                                    } elseif ($user['status'] == 'Отошел') {
+                                    break;
+                                    case $user['status'] == 'Отошел':
                                     echo '<span class="status status-warning mr-3">';
-                                }else {
+                                    break;
+                                    case $user['status'] == 'Не беспокоить':
                                     echo '<span class="status status-danger mr-3">';
+                                    break;
                                 }?>
                                     <span class="rounded-circle profile-image d-block " style="background-image:url('/img/userfoto/<?= $user['photo']?>'); background-size: cover;"></span>
                                 </span>

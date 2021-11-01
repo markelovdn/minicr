@@ -3,9 +3,6 @@ session_start();
 require 'function.php';
 
 $email = $_POST['email'];
-$password = $_POST['password'];
-$hash = password_hash($password, PASSWORD_DEFAULT);
-
 $user = get_user_by_email($email);
 
 if (!$user) {
@@ -13,7 +10,7 @@ if (!$user) {
     redirect_too('../page_login.php');
 }
 
-if(check_user($email, $hash)) {
+if(check_user($email, $user['password'])) {
 $_SESSION['user'] = [
     'id'=>$user['id'],
     'email'=>$email,

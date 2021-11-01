@@ -74,7 +74,7 @@ function redirect_too($path)
 
 function check_user($email, $pass) {
     $user = get_user_by_email($email);
-    if (password_verify($user['password'], $pass)) {
+    if (password_verify($_POST['password'], $pass)) {
         return true;
     }
 }

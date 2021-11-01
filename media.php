@@ -56,10 +56,15 @@ if (empty($_SESSION['user'])) {
                             </div>
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <img src="img/userfoto/<?= $user['photo']?>" alt="" class="img-responsive" width="200">
+                                    <?php if(empty( $user['photo'])):?>
+                                        <img src="img/logo.png" alt="" class="img-responsive" width="200">
+                                    <?php else:?>
+                                        <img src="img/userfoto/<?= $user['photo']?>" alt="" class="img-responsive" width="200">
+                                    <?php endif;?>
                                 </div>
                                 <!-- id display:none -->
                                 <input type="text" name="id" id="simpleinput" class="form-control" value="<?= $user['id']?>" style="display: none">
+                                <input type="text" name="email" id="simpleinput" class="form-control" value="<?= $user['email']?>" style="display: none">
 
                                 <div class="form-group">
                                     <label class="form-label" for="example-fileinput">Выберите аватар</label>

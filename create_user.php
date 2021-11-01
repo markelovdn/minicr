@@ -63,7 +63,6 @@ if (empty($_SESSION['user'])) {
                                 <h2>Общая информация</h2>
                             </div>
                             <div class="panel-content">
-                                <input type="text" id="simpleinput" name="id" class="form-control">
                                 <!-- id -->
                                 <input type="text" id="simpleinput" name="id" class="form-control" style="display: none">
                                 <!-- username -->

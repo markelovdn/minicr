@@ -57,17 +57,22 @@ if (empty($_SESSION['user'])) {
                             <div class="panel-content">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <!-- email display:none -->
-                                        <input type="text" name="email" id="simpleinput" class="form-control" value="<?= $user['email']?>" style="display: none">
+                                        <!-- id display:none -->
+                                        <input type="text" name="id" id="simpleinput" class="form-control" value="<?= $user['id']?>" style="display: none">
                                         <!-- status -->
                                         <div class="form-group">
+                                            <?php $statuses = ['Отошел', 'Онлайн', 'Не беспокоить']; ?>
                                             <label class="form-label" for="example-select">Выберите статус</label>
                                             <select class="form-control" name="status" id="example-select">
-                                                <option>Онлайн</option>
-                                                <option>Отошел</option>
-                                                <option>Не беспокоить</option>
+                                                <?php foreach ($statuses as $value):?>
+                                                    <?php if ($value == $user['status']): ?>
+                                                         <option selected value="<?=$value?>"><?=$value?></option>
+                                                <?php else:?>
+                                                        <option value="<?=$value?>"><?=$value?></option>
+                                                <?php endif;?>
+                                                <?php endforeach;?>
                                             </select>
-                                        </div>
+                                            </div>
                                     </div>
                                     <div class="col-md-12 mt-3 d-flex flex-row-reverse">
                                         <button class="btn btn-warning">Set Status</button>

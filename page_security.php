@@ -56,7 +56,12 @@ if (empty($_SESSION['user'])) {
                             </div>
                             <div class="panel-content">
                                 <!-- id -->
-                                <input type="text" name="id" id="simpleinput" class="form-control" value="<?= $user['id']?>">
+                                <input type="text" name="id" id="simpleinput" class="form-control" value="<?= $user['id']?>" style="display: none">
+                                <?php if(isset($_SESSION['not_ok_email'])):?>
+                                    <div class="alert alert-danger text-dark" role="alert">
+                                        <strong>Уведомление!</strong> <?=display_flash_message('not_ok_email')?>
+                                    </div>
+                                <?php endif ?>
                                 <!-- email -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Email</label>
@@ -74,7 +79,11 @@ if (empty($_SESSION['user'])) {
                                     <label class="form-label" for="simpleinput">Подтверждение пароля</label>
                                     <input type="password" name="repassword" id="simpleinput" class="form-control">
                                 </div>
-
+                                <?php if(isset($_SESSION['not_ok_pass'])):?>
+                                    <div class="alert alert-danger text-dark" role="alert">
+                                        <strong>Уведомление!</strong> <?=display_flash_message('not_ok_pass')?>
+                                    </div>
+                                <?php endif ?>
 
                                 <div class="col-md-12 mt-3 d-flex flex-row-reverse">
                                     <button class="btn btn-warning">Изменить</button>

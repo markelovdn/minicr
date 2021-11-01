@@ -73,7 +73,6 @@ function redirect_too($path)
 }
 
 function check_user($email, $pass) {
-    $user = get_user_by_email($email);
     if (password_verify($_POST['password'], $pass)) {
         return true;
     }
@@ -112,6 +111,11 @@ function edit_user_info($user_id, $username, $workplace, $phone, $adress){
 
 function edit_user_secur_info($user_id, $email, $pass){
     $db = db();
+
+    if ($_POST['password'] == ''){
+        $sql = "UPDATE users SET email = '$email' WHERE id = $user_id";
+        mysqli_query($db, $sql);
+    }
     $password = password_hash($pass, PASSWORD_DEFAULT);
     $sql = "UPDATE users SET email = '$email', password = '$password' WHERE id = $user_id";
     //dd($sql);
@@ -126,7 +130,7 @@ function set_user_status($user_id, $status){
 
 function upload_user_photo($user_id, $photo){
     $db = db();
-    $file_name = $_POST['id']."_photo".".jpg";
+    $file_name = $_POST['email']."_photo".".jpg";
     $sql = "UPDATE users SET photo = '$file_name' WHERE id = $user_id";
     //dd($sql);
     mysqli_query($db, $sql);
@@ -146,11 +150,18 @@ function add_user_sl($user_id, $vk, $telegram, $instagram){
     mysqli_query($db, $sql);
 }
 
+function get_author($id) {
+    if ($id==$_SESSION['user']['id']){
+        return true;
+    }
+}
+
 function drop_user($id){
     $db = db();
     $sql = "DELETE FROM users WHERE id = $id";
     //dd($sql);
     mysqli_query($db, $sql);
+
 }
 
 function unset_user() {
